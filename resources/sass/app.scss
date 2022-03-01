@@ -1,0 +1,67 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+
+// Variables
+//@import 'variables';
+
+$primary:#70a55c;//#0c6971
+$border-radius:1.5rem;
+$btn-padding-x:1.5rem;
+$border-radius-lg:2rem;
+$btn-padding-x-lg : 2rem;
+
+// Typography
+$font-family-sans-serif: 'Montserrat', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+.btn-primary:hover,.btn-outline-primary:hover,.btn-outline-warning:hover{
+    color: #fff;
+}
+
+.logo{
+    filter: drop-shadow(2px 4px 4px $primary);
+}
+
+.h-350{
+    height: 350px;
+}
+
+.user-img{
+    width: 40px;
+    height: 40px;
+}
+.cover-img{
+    height: 350px;
+    object-fit: cover;
+}
+
+.post{
+    border-bottom: 1px solid $border-color;
+    padding-bottom: 1.5rem;
+    transition: .4s;
+}
+.post:last-child{
+    border-bottom: none;
+}
+
+.post-detail{
+    white-space: pre-line;
+}
+
+.social-icon>a>i{
+    color: #fff3cd;
+    transition: .4s;
+    &:hover{
+        transform:translate(0px, -3px)gi;
+        color: #0c4128;
+        cursor: pointer;
+        text-shadow: -3px 2px 1px green;
+    }
+}
