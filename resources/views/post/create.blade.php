@@ -46,7 +46,7 @@
                     </div>
                     <div class="text-center mb-4">
                         <button class="btn btn-lg btn-primary text-light">
-                            <i class="fas fa-message fa-fw"></i>
+{{--                            <i class="fas fa-arrow-up fa-fw"></i>--}}
                             Create Post
                         </button>
                     </div>

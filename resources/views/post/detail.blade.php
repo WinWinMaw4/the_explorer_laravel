@@ -48,13 +48,30 @@
                         </div>
 
                         <img src="{{ asset("storage/cover/".$post->cover) }}" class="cover-img rounded-3 w-100 my-4" alt="">
-                        <p class="text-black-50 post-detail">
+                        <p class="text-black post-detail">
                             {{ $post->description }}
                         </p>
 
+                        @if($post->galleries->count())
+                            <div class="gallery border rounded mb-4">
+                                <h4 class="text-center fw-bold mt-4">Post Gallery</h4>
+                                <div class="row g-4 py-4 px-2 justify-content-center">
+                                    @foreach($post->galleries as $gallery)
+                                        <div class="col-6 col-lg-4 col-xl-3">
+                                            <a class="venobox" data-gall="gall{{$gallery->post_id}}" data-title="{{$post->title}}" data-maxwidth="800px" href="{{asset('storage/gallery/'.$gallery->photo)}}">
+                                                <img src="{{asset('storage/gallery/'.$gallery->photo)}}" class="gallery-photo" alt="">
+                                            </a>
 
-                        <div class="mb-5">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+
+
+                        <div class="my-5">
                             <h4 class="text-center fw-bold mb-4">Users Comment</h4>
+
                             <div class="row justify-content-center">
                                 <div class="col-lg-10">
 
@@ -85,6 +102,12 @@
 
                                         <div class="comments">
                                             @forelse($post->comments as $comment)
+                                                @guest
+                                                    <p class="text-center mb-4">
+                                                        <a href="{{route('login')}}" class="fw-bold text-center">Login</a> to comment.
+                                                    </p>
+                                                @endguest
+
                                                 <div class="border rounded p-3 mb-3">
                                                     <div class="d-flex justify-content-between mb-3">
                                                         <div class="d-flex">
@@ -112,7 +135,15 @@
                                                     </p>
                                                 </div>
                                             @empty
-                                                <p class="text-center">There is no Comment</p>
+                                                <p class="text-center">There is no Comment yet !
+                                                @auth
+                                                    Start comment now.
+                                                @endauth
+
+                                                @guest
+                                                    <a href="{{route('login')}}" class="fw-bold">Login</a> to comment.
+                                                @endguest
+                                                </p>
                                             @endforelse
                                         </div>
 

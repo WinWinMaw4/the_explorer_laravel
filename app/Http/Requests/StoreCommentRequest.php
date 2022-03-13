@@ -14,6 +14,7 @@ class StoreCommentRequest extends FormRequest
      */
     public function authorize()
     {
+//        return false;
         return Post::find($this->post_id);
     }
 

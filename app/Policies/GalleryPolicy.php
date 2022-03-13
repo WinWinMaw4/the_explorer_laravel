@@ -66,6 +66,7 @@ class GalleryPolicy
     public function delete(User $user, Gallery $gallery)
     {
         //
+        return $user->id === $gallery->user_id;
     }
 
     /**

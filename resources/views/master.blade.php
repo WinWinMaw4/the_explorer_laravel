@@ -39,11 +39,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-primary text-capitalize" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{auth()->user()->name}}
-                            <img src="{{asset("user-default.png")}}" class="user-img rounded-circle border border-2 border-white shadow-sm" alt="">
+                            <img src="{{asset(auth()->user()->photo)}}" class="user-img rounded-circle border border-2 border-white shadow-sm" alt="">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Change Password</a></li>
+                            <li><a class="dropdown-item" href="{{route('edit-profile')}}">Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="{{route('change-password')}}">Change Password</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
                         </ul>
@@ -58,35 +58,58 @@
 
 @yield('content')
 
+{{--footer--}}
 <div class="py-3 px-2 bg-primary text-white ">
    <div class="container d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center ">
        <a class="navbar-brand" href="{{route('index')}}">
            <img src="{{asset('images/logo.png')}}" height="50" class="logo" alt="">
        </a>
        <div class="social-icon my-4 my-md-0">
-           <a href="#"  class=" text-decoration-none p-1 p-lg-2 rounded-circle text-center me-1">
+           <a href="#"  class=" text-decoration-none p-1 p-lg-2 rounded-circle text-center me-1" title="facebook">
                <i class="fab fa-facebook-f fa-fw fa-2x "></i>
            </a>
-           <a href="#" class=" text-decoration-none p-1 p-lg-2 rounded-circle text-center me-1">
+           <a href="#" class=" text-decoration-none p-1 p-lg-2 rounded-circle text-center me-1" title="github">
                <i class="fab fa-github fa-fw fa-2x "></i>
            </a>
-           <a href="#" class=" text-decoration-none p-1 p-lg-2 rounded-circle text-center me-1">
+           <a href="#" class=" text-decoration-none p-1 p-lg-2 rounded-circle text-center me-1" title="instagram">
                <i class="fab fa-instagram fa-fw fa-2x "></i>
            </a>
-           <a href="#" class=" text-decoration-none p-1 p-lg-2 rounded-circle text-center me-1">
+           <a href="#" class=" text-decoration-none p-1 p-lg-2 rounded-circle text-center me-1" title="codepen io">
                <i class="fab fa-codepen fa-fw fa-2x "></i>
            </a>
-
-
        </div>
 
-       <span class="">
-        CopyRight&copy;{{ date('Y') }} By WinWinMaw
-        </span>
+       <span class="fw-lighter">
+            &copy;{{ date('Y') }} WinWinMaw. All Rights Reversed.
+       </span>
    </div>
 </div>
 
 <script src="{{asset('js/app.js')}}"></script>
 @stack('scripts')
+
+@if(session('status'))
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            showCloseButton:true,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+        Toast.fire({
+            icon: 'success',
+            title: '{{ session('status') }}'
+        })
+    </script>
+@endif
+
+
+
 </body>
 </html>

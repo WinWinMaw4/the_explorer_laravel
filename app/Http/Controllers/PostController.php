@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\FileControl;
+use App\Jobs\CreateFile;
+use App\Mail\PostMail;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
@@ -49,18 +54,27 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
 
-        $newName = "cover_".uniqid()."_".$request->file('cover')->extension();
-        $request->file('cover')->storeAs("public/cover",$newName);
+//        $newName = "cover_".uniqid().".".$request->file('cover')->extension();
+//        $request->file('cover')->storeAs("public/cover",$newName);
 
         $post = new Post();
         $post->title = $request->title;
-        $post->slug = Str::slug($request->title);
+        $post->slug = $request->title;//change mutator in post model
         $post->description = $request->description;
         $post->excerpt = Str::words($request->description,50);
+        $newName = FileControl::fileSave('cover','cover');
         $post->cover = $newName;
         $post->user_id = Auth::id();
         $post->save();
 
+//        CreateFile::dispatch($newName)->delay(now()->addSecond(5));
+
+
+        //Mail send here
+//        $mailArr = ["mawinwinmaw4@gmail.com","thanthanlwin@gmail.com"];
+//        foreach ($mailArr as $mail){
+//            Mail::to($mail)->later(now()->addSecond(60),new PostMail($post->title,$post->excerpt));
+//        }
 
         return redirect()->route("index")->with('status','Post Created');
 
@@ -112,11 +126,11 @@ class PostController extends Controller
             Storage::delete("public/cover/".$post->cover);
 
 //            upload new cover
-            $newName = "cover_".uniqid()."_".$request->file('cover')->extension();
-            $request->file('cover')->storeAs("public/cover",$newName);
+//            $newName = "cover_".uniqid()."_".$request->file('cover')->extension();
+//            $request->file('cover')->storeAs("public/cover",$newName);
 
 //            save to table
-                $post->cover = $newName;
+                $post->cover = FileControl::fileSave('cover','cover');
         }
 
             $post->update();
@@ -135,7 +149,10 @@ class PostController extends Controller
         //
         Gate::authorize('delete',$post);
 
-        Storage::delete("public/cover/".$post->cover);
+        foreach ($post->galleries as $gallery) {
+            Storage::delete('public/gallery/'.$gallery->photo);
+        }
+
         $post->delete();
         return redirect()->route('index');
     }

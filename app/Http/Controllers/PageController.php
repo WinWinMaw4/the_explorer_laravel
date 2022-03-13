@@ -11,12 +11,12 @@ class PageController extends Controller
     //
     public function index(){
 
-        $posts = Post::latest("id")->get();
+        $posts = Post::latest("id")->paginate(10);
         return view("index",["posts"=>$posts]);//compact($posts)
     }
 
     public function detail($slug){
-        $post = Post::where("slug",$slug)->firstOrfail();//firstOrfail က routeကခေါ်ရင်ပါ မရှိရင်ကာတာ
+        $post = Post::where("slug",$slug)->with(['comments','galleries'])->firstOrfail();//firstOrfail က routeကခေါ်ရင်ပါ မရှိရင်ကာတာ
         return  view('post.detail',["post"=>$post]);
         return $slug;
     }

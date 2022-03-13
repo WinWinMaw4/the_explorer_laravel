@@ -16,11 +16,11 @@
                 @endauth
 
 
-                    @if(session('status'))
-                        <p class="text-success alert alert-success">
-                            {{session('status')}}
-                        </p>
-                    @endif
+{{--                    @if(session('status'))--}}
+{{--                        <p class="text-success alert alert-success">--}}
+{{--                            {{session('status')}}--}}
+{{--                        </p>--}}
+{{--                    @endif--}}
 
                     <div class="posts">
                         @forelse($posts as $post)
@@ -76,9 +76,15 @@
                                 </div>
                             </div>
 
+
                         @empty
 
                         @endforelse
+                    </div>
+
+
+                    <div class="d-flex justify-content-center align-items-center">
+                        {{$posts->links()}}
                     </div>
             </div>
 
