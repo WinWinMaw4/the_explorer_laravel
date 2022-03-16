@@ -17,7 +17,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/',[PageController::class,'index'])->name("index");
 Route::get('/detail/{slug}',[PageController::class,'detail'])->name('post.detail');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('/post',App\Http\Controllers\PostController::class);

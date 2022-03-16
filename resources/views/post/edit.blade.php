@@ -1,5 +1,5 @@
 @extends('master');
-@section("title") Create Post : {{env("APP_NAME")}} @endsection
+@section('title') Edit Post : {{env("APP_NAME")}} @endsection
 @section('content')
 
     <div class="container">
@@ -99,7 +99,7 @@
         </div>
     </div>
 
-@endsection
+@stop
 
 @push('scripts')
     <script>

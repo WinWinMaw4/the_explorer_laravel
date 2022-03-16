@@ -3,6 +3,7 @@
 
     <div class="container">
         <div class="row justify-content-center">
+            <h1 class="my-4">Mingalar Par</h1>
             <div class="col-lg-10 col-xl-8">
                 @auth
                     <div class="border rounded-3 p-4 d-flex justify-content-between align-items-center mb-4">
