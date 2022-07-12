@@ -5,6 +5,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10 col-xl-8">
+{{--                <a href="javascript:history.back()" class="text-black-50 text-decoration-none"><i class="fas fa-long-arrow-alt-left fa-1x fa-fw"></i>Back</a>--}}
                <div class="d-flex justify-content-between align-items-center mb-4">
                    <h4 class="mb-0 text-primary">Create New Post</h4>
                    <p class="mb-0">

@@ -20,7 +20,7 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'verified'])->except(['index','show']);
+//        $this->middleware(['auth', 'verified'])->except(['index','show']);
     }
 
     /**
@@ -71,10 +71,10 @@ class PostController extends Controller
 
 
         //Mail send here
-//        $mailArr = ["mawinwinmaw4@gmail.com","thanthanlwin@gmail.com"];
-//        foreach ($mailArr as $mail){
-//            Mail::to($mail)->later(now()->addSecond(60),new PostMail($post->title,$post->excerpt));
-//        }
+        $mailArr = ["mawinwinmaw4@gmail.com","thanthanlwin@gmail.com"];
+        foreach ($mailArr as $mail){
+            Mail::to($mail)->later(now()->addSecond(60),new PostMail($post->title,$post->excerpt));
+        }
 
         return redirect()->route("index")->with('status','Post Created');
 

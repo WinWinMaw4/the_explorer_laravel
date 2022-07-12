@@ -19,6 +19,10 @@ class GalleryController extends Controller
     public function index()
     {
         //
+        $galleries = Gallery::latest("id")->where('user_id',1)->paginate(30);
+        return view('gallery.index',[
+            'galleries'=>$galleries
+        ]);
     }
 
     /**

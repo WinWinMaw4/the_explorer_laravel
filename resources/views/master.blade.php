@@ -44,6 +44,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{route('edit-profile')}}">Edit Profile</a></li>
                             <li><a class="dropdown-item" href="{{route('change-password')}}">Change Password</a></li>
+                            <li><a class="dropdown-item" href="{{route('gallery.index')}}">Gallery</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
                         </ul>

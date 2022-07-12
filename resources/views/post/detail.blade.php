@@ -6,7 +6,9 @@
             <div class="col-lg-10 col-xl-8">
                 <div class="post mb-4">
                     <div class="row">
-
+                       <div class="d-flex justify-content-start my-2" style="cursor: pointer">
+                           <a href="javascript:history.back()" class="text-black-50"><i class="fas fa-long-arrow-alt-left fa-2x fa-fw"></i></a>
+                       </div>
                         <div class="d-flex mb-4 justify-content-start align-items-center">
                             <img src="{{ asset($post->user->photo) }}" class="user-img rounded-circle" alt="">
                             <p class="mb-0 ms-2">
@@ -34,13 +36,14 @@
                                         </a>
                                     @endcan
                                     @can('delete',$post)
-                                        <form action="{{route('post.destroy',$post->id)}}" method="post" class="d-inline-block">
+                                        <form action="{{route('post.destroy',$post->id)}}" method="post" id="del{{$post->id}}" class="d-inline-block">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-outline-danger me-1">
+
+                                        </form>
+                                            <button class="btn btn-outline-danger me-1 del-btn" form="del{{$post->id}}">
                                                 <i class="fas fa-trash-alt fa-fw fa-1x"></i>
                                             </button>
-                                        </form>
                                     @endcan
                                 @endauth
                                 <a href="{{route('index')}}" class="btn btn-outline-primary">Read All</a>
@@ -101,12 +104,13 @@
                                     @endauth
 
                                         <div class="comments">
-                                            @forelse($post->comments as $comment)
-                                                @guest
-                                                    <p class="text-center mb-4">
-                                                        <a href="{{route('login')}}" class="fw-bold text-center">Login</a> to comment.
-                                                    </p>
-                                                @endguest
+                                            @guest
+                                                <p class="text-center mb-4">
+                                                    <a href="{{route('login')}}" class="fw-bold text-center">Login</a> to comment.
+                                                </p>
+                                            @endguest
+
+                                        @forelse($post->comments as $comment)
 
                                                 <div class="border rounded p-3 mb-3">
                                                     <div class="d-flex justify-content-between mb-3">
@@ -161,3 +165,33 @@
 
 
 @endsection
+@push('scripts')
+    <script>
+        let delBtn = document.getElementsByClassName('del-btn');
+        for(let i=0; i<= delBtn.length ; i++){
+            delBtn[i].addEventListener('click',function (){
+                event.preventDefault();
+                formId = this.getAttribute('form');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#56923f',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById(formId).submit();
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    }
+                })
+            })
+
+        }
+    </script>
+@endpush

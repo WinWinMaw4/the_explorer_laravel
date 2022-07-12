@@ -6,7 +6,9 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-lg-6 col-xl-5 min-vh-100 ">
                 <div class="">
-                    <div class="text-center my-5 shadow py-4 bg-primary rounded text-white">
+                    <a href="javascript:history.back()" class="text-black-50"><i class="fas fa-long-arrow-alt-left fa-2x fa-fw"></i></a>
+
+                    <div class="text-center my-5 mt-2 shadow py-4 bg-primary rounded text-white">
                         <h4 class="fw-bold mb-4">Edit Your Profile</h4>
 
                         <img src="{{asset(auth()->user()->photo)}}" class="profile-image" alt=""><br>

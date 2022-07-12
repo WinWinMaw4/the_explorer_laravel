@@ -6,7 +6,10 @@
         <div class="row justify-content-center">
             <div class="col-lg-10 col-xl-8">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h4 class="mb-0 text-primary">Update Post</h4>
+                    <div class="">
+{{--                        <a href="{{route('index')}}" class="btn btn-default"><i class="fas fa-long-arrow-alt-left fa-2x fa-fw"></i></a>--}}
+                        <h4 class="mb-0 text-primary">Update Post</h4>
+                    </div>
                     <p class="mb-0">
                         <i class="fas fa-calendar"></i>
                         {{date('d M Y')}}

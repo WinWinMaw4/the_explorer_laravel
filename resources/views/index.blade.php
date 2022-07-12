@@ -3,7 +3,7 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <h1 class="my-4 text-center">Mingalar Par</h1>
+{{--            <h1 class="my-4 text-center">Mingalar Par</h1>--}}
             <div class="col-lg-10 col-xl-8">
                 @auth
                     <div class="border rounded-3 p-4 d-flex justify-content-between align-items-center mb-4">
@@ -43,13 +43,13 @@
                                                                 </a>
                                                             @endcan
                                                                 @can('delete',$post)
-                                                                    <form action="{{route('post.destroy',$post->id)}}" method="post" class="d-inline-block">
+                                                                    <form action="{{route('post.destroy',$post->id)}}" method="post" id="del{{$post->id}}" class="d-inline-block">
                                                                         @csrf
                                                                         @method('delete')
-                                                                        <button class="btn btn-outline-danger me-1">
-                                                                            <i class="fas fa-trash-alt fa-fw fa-1x"></i>
-                                                                        </button>
                                                                     </form>
+                                                                    <button class="btn btn-outline-danger me-1 del-btn" form="del{{$post->id}}">
+                                                                        <i class="fas fa-trash-alt fa-fw fa-1x"></i>
+                                                                    </button>
                                                                 @endcan
 
                                                         @endauth
@@ -79,7 +79,15 @@
 
 
                         @empty
-
+                                <div class="">
+                                    <div class="row">
+                                        <div class="col-12 text-center text-muted d-flex align-items-center justify-content-center" style="height: 55vh;width: 100%">
+                                            <h1>
+                                                There is no Post
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
                         @endforelse
                     </div>
 
@@ -95,3 +103,33 @@
 
 
 @endsection
+@push('scripts')
+   <script>
+       let delBtn = document.getElementsByClassName('del-btn');
+       for(let i=0; i<= delBtn.length ; i++){
+           delBtn[i].addEventListener('click',function (){
+               event.preventDefault();
+               formId = this.getAttribute('form');
+               Swal.fire({
+                   title: 'Are you sure?',
+                   text: "You won't be able to revert this!",
+                   icon: 'warning',
+                   showCancelButton: true,
+                   confirmButtonColor: '#56923f',
+                   cancelButtonColor: '#d33',
+                   confirmButtonText: 'Yes, delete it!'
+               }).then((result) => {
+                   if (result.isConfirmed) {
+                       document.getElementById(formId).submit();
+                       Swal.fire(
+                           'Deleted!',
+                           'Your file has been deleted.',
+                           'success'
+                       )
+                   }
+               })
+           })
+
+       }
+   </script>
+@endpush
