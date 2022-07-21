@@ -7,7 +7,7 @@
                 <div class="post mb-4">
                     <div class="row">
                        <div class="d-flex justify-content-start my-2" style="cursor: pointer">
-                           <a href="javascript:history.back()" class="text-black-50"><i class="fas fa-long-arrow-alt-left fa-2x fa-fw"></i></a>
+{{--                           <a href="javascript:history.back()" class="text-black-50"><i class="fas fa-long-arrow-alt-left fa-2x fa-fw"></i></a>--}}
                        </div>
                         <div class="d-flex mb-4 justify-content-start align-items-center">
                             <img src="{{ asset($post->user->photo) }}" class="user-img rounded-circle" alt="">

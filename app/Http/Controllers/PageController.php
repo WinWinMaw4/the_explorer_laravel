@@ -11,7 +11,7 @@ class PageController extends Controller
     //
     public function index(){
 
-        $posts = Post::latest("id")->paginate(10);
+        $posts = Post::latest("id")->paginate(5);
         return view("index",["posts"=>$posts]);//compact($posts)
     }
 

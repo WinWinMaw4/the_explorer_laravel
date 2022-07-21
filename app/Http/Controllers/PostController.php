@@ -8,6 +8,7 @@ use App\Mail\PostMail;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
@@ -32,6 +33,16 @@ class PostController extends Controller
     {
     //
         return redirect()->route('index');
+    }
+
+    public function search(Request $request){
+        if ($request->search){
+            $searchKey = $request->search;
+            $posts = Post::where("title","LIKE","%$searchKey%")->orWhere("description","LIKE","%$searchKey%")->paginate(7)->withQueryString();
+            return view('index',compact('posts'));
+        }else{
+            return redirect()->route('index');
+        }
     }
 
     /**

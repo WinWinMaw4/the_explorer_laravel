@@ -22,6 +22,25 @@
 {{--                            {{session('status')}}--}}
 {{--                        </p>--}}
 {{--                    @endif--}}
+                    <form action="{{route('search')}}" method="get">
+                        <div class="me-2 mb-3 row">
+                            <div class="col-12 col-md-10">
+                                <div class="input-group d-inline-flex">
+                                    <input type="text"  name="search" value="{{request('search')}}" class="form-control border" placeholder="Search">
+                                    <button class="btn btn-outline-primary">
+                                        <i class="fa-solid fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                    <button class="btn btn-primary">
+                                        <a href="{{route('index')}}" class="text-white text-decoration-none">All Post</a>
+                                    </button>
+                            </div>
+                        </div>
+                    </form>
+
+
 
                     <div class="posts">
                         @forelse($posts as $post)
@@ -35,7 +54,7 @@
                                             <div class="">
                                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                                     <h4 class="fw-bold text-primary">{{ $post->title }}</h4>
-                                                    <div class="">
+                                                    <div class="text-nowrap">
                                                         @auth
                                                             @can('update',$post)
                                                                 <a href="{{route('post.edit',$post->id)}}" class="btn btn-outline-warning text-decoration-none me-1">
@@ -61,7 +80,14 @@
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="d-flex">
-                                                    <img src="{{ asset($post->user->photo) }}" class="user-img rounded-circle" alt="">
+                                                    <div class="position-relative">
+                                                        <img src="{{ asset($post->user->photo) }}" class="user-img rounded-circle" alt="">
+                                                        @if($post->user->isOnline())
+                                                            <span class="bg-success active-ball"></span>
+                                                        @else
+                                                            <span class="active-ball" style="background-color: transparent"></span>
+                                                        @endif
+                                                    </div>
                                                     <p class="mb-0 ms-2 small">
                                                         <span class="text-primary   ">{{ $post->user->name }}</span>
                                                         <br>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -31,9 +32,20 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+
+
     public function index()
     {
         return view('home');
+    }
+
+    public function userPost($user_id){
+
+        $posts = Post::where('user_id',$user_id)->paginate(5);
+        return view('post.user-posts',[
+            'posts'=>$posts
+        ]);
     }
 
     public function editProfile(){
@@ -62,7 +74,7 @@ class HomeController extends Controller
             $user->photo = $dir."/".$newName;
         }
         $user->update();
-        return redirect()->back();
+        return redirect()->back()->with('status','Profile Updated');
     }
 
     public function changePassword(){
@@ -87,7 +99,7 @@ class HomeController extends Controller
         auth()->logout();
         return redirect()->route('login');
 
-        return redirect()->back();
+        return redirect()->back()->with('status','Password Updated');
 
     }
 

@@ -11,7 +11,7 @@
 //#4E9F3D(green)
 //#D8E9A8(greensoft)
 
-$primary:#56923f;//#70a55c;//#0c6971
+$primary: #2a8d03;//#70a55c;//#0c6971
 $secondary : #1b5308;//#1b5308,#163b0a
 $border-radius:1.5rem;
 $btn-padding-x:1.5rem;
@@ -46,6 +46,15 @@ $line-height-base: 1.6;
     width: 40px;
     height: 40px;
     object-fit: cover;
+}
+.active-ball{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: $primary;
 }
 .profile-image{
     width: 150px;
