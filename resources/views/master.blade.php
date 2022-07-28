@@ -8,6 +8,10 @@
     <title>@yield('title',env('APP_NAME'))</title>
     <link rel="icon" href="{{asset('images/icon.png')}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
+
+{{--    summernote css link--}}
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     @yield('head')
 </head>
 <body>
@@ -88,6 +92,18 @@
 </div>
 
 <script src="{{asset('js/app.js')}}"></script>
+{{--    summernote js  link--}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $("#my_summernote").summernote({
+            height:500
+        });
+        $('.dropdown-toggle').dropdown();
+    });
+</script>
 @stack('scripts')
 
 @if(session('status'))

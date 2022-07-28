@@ -52,8 +52,11 @@
 
                         <img src="{{ asset("storage/cover/".$post->cover) }}" class="cover-img rounded-3 w-100 my-4" alt="">
                         <p class="text-black post-detail">
-                            {{ $post->description }}
+                            {!! $post->description !!}
                         </p>
+{{--                        <textarea name="description" id="my_summernote" class="form-control " placeholder="Leave a comment here" id="floatingTextarea2" style="height: 450px">--}}
+{{--                             {{ $post->description }}--}}
+{{--                        </textarea>--}}
 
                         @if($post->galleries->count())
                             <div class="gallery border rounded mb-4">

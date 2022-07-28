@@ -1,5 +1,8 @@
 @extends('master');
 @section("title") Create Post : {{env("APP_NAME")}} @endsection
+@section("head")
+
+@endsection
 @section('content')
 
     <div class="container">
@@ -35,10 +38,10 @@
                         @enderror
                     </div>
                     <div class="form-floating mb-4">
-                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 450px">
+                        <textarea name="description" id="my_summernote" class="form-control @error('description') is-invalid @enderror" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 450px">
                         {{  old('description')  }}
                         </textarea>
-                        <label for="floatingTextarea2">Share Your Experience</label>
+{{--                        <label for="floatingTextarea2">Share Your Experience</label>--}}
                         @error('description')
                         <div class="invalid-feedback">
                             <span>{{$message}}</span>
@@ -60,6 +63,9 @@
 @stop
 
 @push('scripts')
+
+
+
     <script>
         let coverPreview = document.getElementById('coverPreview');
         let cover = document.getElementById('cover');

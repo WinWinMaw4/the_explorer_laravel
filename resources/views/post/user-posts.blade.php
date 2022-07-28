@@ -62,8 +62,14 @@
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex">
-                                                <img src="{{ asset($post->user->photo) }}" class="user-img rounded-circle" alt="">
-                                                <p class="mb-0 ms-2 small">
+                                                <div class="position-relative">
+                                                    <img src="{{ asset($post->user->photo) }}" class="user-img rounded-circle" alt="">
+                                                    @if($post->user->isOnline())
+                                                        <span class="bg-success active-ball"></span>
+                                                    @else
+                                                        <span class="active-ball" style="background-color: transparent"></span>
+                                                    @endif
+                                                </div>                                                <p class="mb-0 ms-2 small">
                                                     <span class="text-primary   ">{{ $post->user->name }}</span>
                                                     <br>
                                                     <i class="fas fa-calendar"></i>
