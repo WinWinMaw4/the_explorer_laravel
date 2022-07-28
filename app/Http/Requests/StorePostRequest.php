@@ -26,6 +26,7 @@ class StorePostRequest extends FormRequest
         return [
             //unique:table,column
             "title" => "required|unique:posts,title|min:5",
+//            "excerpt"=>"required|unique:posts,excerpt|min:1|max:70",
             "description" => "required|min:15",
             "cover" => "required|file|mimes:jpeg,png|max:5000"
         ];

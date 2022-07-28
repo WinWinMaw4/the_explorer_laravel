@@ -72,7 +72,8 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->slug = $request->title;//change mutator in post model
         $post->description = $request->description;
-        $post->excerpt = Str::words($request->description,50);
+//        $post->excerpt = Str::words($request->description,50);
+        $post->excerpt = Str::words($request->excerpt,70);
         $newName = FileControl::fileSave('cover','cover');
         $post->cover = $newName;
         $post->user_id = Auth::id();
@@ -129,7 +130,8 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->slug = Str::slug($request->title);
         $post->description = $request->description;
-        $post->excerpt = Str::words($request->description,50);
+//        $post->excerpt = Str::words($request->description,50);
+        $post->excerpt = Str::words($request->excerpt,70);
 
         if($request->hasFile('cover')){
 

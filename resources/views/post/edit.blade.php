@@ -38,6 +38,17 @@
                         @enderror
                     </div>
                     <div class="form-floating mb-4">
+                        <textarea name="excerpt" class="form-control @error('excerpt') is-invalid @enderror" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px">
+                        {{  old('excerpt',$post->excerpt)  }}
+                        </textarea>
+                        <label for="floatingTextarea2">Excerpt Text</label>
+                        @error('excerpt')
+                        <div class="invalid-feedback">
+                            <span>{{$message}}</span>
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="form-floating mb-4">
                         <textarea name="description" id="my_summernote" class="form-control @error('description')border border-danger is-invalid @enderror" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 450px">
                             {{old('description',$post->description)}}
                         </textarea>

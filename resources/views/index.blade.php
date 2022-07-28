@@ -52,7 +52,7 @@
                                     <div class="col-lg-8">
                                         <div class="d-flex flex-column justify-content-between h-350 py-4">
                                             <div class="">
-                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div class="d-flex justify-content-between align-items-center mb-2 position-relative">
                                                     <h4 class="fw-bold text-primary">{{ $post->title }}</h4>
                                                     <div class="text-nowrap">
                                                         @auth
@@ -74,8 +74,9 @@
                                                         @endauth
                                                     </div>
                                                 </div>
-                                                <p class="text-black-50">
-                                                    {{ $post->excerpt }}
+                                                <p class="text-black-50 align-items-start text-start overflow-hidden" style="max-height: 160px;">
+                                                    {{\Illuminate\Support\Str::wordCount($post->excerpt)}}
+                                                    {{$post->excerpt}}
                                                 </p>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">

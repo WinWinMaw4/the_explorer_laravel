@@ -27,6 +27,7 @@ class UpdatePostRequest extends FormRequest
         return [
             //unique:table,column
             "title" => "required|unique:posts,title,".$this->route('post')->id."|min:5",
+//            "excerpt"=>"required|unique:posts,excerpt,".$this->route('post')->id."|min:1|max:70",
             "description" => "required|min:15",
             "cover" => "nullable|file|mimes:jpeg,png|max:5000"
         ];
