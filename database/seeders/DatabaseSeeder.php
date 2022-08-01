@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Comment;
 use App\Models\Gallery;
 use App\Models\Post;
+use App\Models\PostView;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -41,6 +42,7 @@ class DatabaseSeeder extends Seeder
         Post::factory(40)->create();
         Comment::factory(170)->create();
         Gallery::factory(230)->create();
+//        PostView::factory(200)->create();
 
 
     }

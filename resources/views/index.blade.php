@@ -74,29 +74,53 @@
                                                         @endauth
                                                     </div>
                                                 </div>
-                                                <p class="text-black-50 align-items-start text-start overflow-hidden" style="max-height: 160px;">
+                                                <p class="text-black align-items-start text-start overflow-hidden" style="max-height: 160px;">
                                                     {{\Illuminate\Support\Str::wordCount($post->excerpt)}}
                                                     {{$post->excerpt}}
                                                 </p>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="d-flex">
-                                                    <div class="position-relative">
-                                                        <img src="{{ asset($post->user->photo) }}" class="user-img rounded-circle" alt="">
-                                                        @if($post->user->isOnline())
-                                                            <span class="bg-success active-ball"></span>
-                                                        @else
-                                                            <span class="active-ball" style="background-color: transparent"></span>
-                                                        @endif
-                                                    </div>
-                                                    <p class="mb-0 ms-2 small">
-                                                        <span class="text-primary   ">{{ $post->user->name }}</span>
-                                                        <br>
-                                                        <i class="fas fa-calendar"></i>
-{{--                                                        {{ $post->created_at->diffForHumans() }}--}}
-                                                        {{$post->created_at->format("d M Y"),}}
-                                                    </p>
+                                                    <a href="{{route('user.post',$post->user->name)}}" class="d-flex align-item-center text-decoration-none" >
+                                                            <div class="position-relative">
+                                                                <img src="{{ asset($post->user->photo) }}" class="user-img rounded-circle" alt="">
+                                                                @if($post->user->isOnline())
+                                                                    <span class="bg-success active-ball"></span>
+                                                                @else
+                                                                    <span class="active-ball" style="background-color: transparent"></span>
+                                                                @endif
+                                                            </div>
+                                                        <p class="mb-0 ms-2 small">
+                                                            <span class="text-primary">{{ $post->user->name }}</span>
+                                                            <br>
+                                                            <span class="text-black-50 ">
+                                                                <i class="fas fa-calendar"></i>
+                                                                {{--                                                        {{ $post->created_at->diffForHumans() }}--}}
+                                                                {{$post->created_at->format("d M Y"),}}
+                                                                {{$post->created_at->format("h:i a"),}}
+                                                            </span>
+                                                        </p>
+                                                    </a>
                                                 </div>
+                                               <div class="d-flex justify-content-center align-items-center text-end my-2">
+{{--                                                   viewer--}}
+                                                   <div class="mx-1" title="viewer">
+                                                    <span class="badge bg-success rounded rounded-1">
+                                                        <i class="fas fa-eye me-2"></i>{{$post->views}}
+                                                    </span>
+                                                   </div>
+{{--                                                   comment--}}
+                                                   <div class="mx-1" title="comments">
+                                                       <div class="text-end my-2" title="comments">
+                                                            <span class="badge bg-success rounded rounded-1">
+                                                                <i class="fas fa-comments"></i>
+                                                                {{count($post->comments)}}
+                                                            </span>
+                                                       </div>
+                                                       {{-- {{\App\Models\Comment::where('post_id',$post->id)->count('id')}} --}}
+                                                   </div>
+                                               </div>
+
                                                 <a href="{{route('post.detail',$post->slug)}}" class="btn btn-outline-primary">Read More</a>
                                             </div>
                                         </div>

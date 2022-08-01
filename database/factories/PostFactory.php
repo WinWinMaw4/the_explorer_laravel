@@ -25,6 +25,7 @@ class PostFactory extends Factory
             'description' => $description,
             'excerpt' => $excerpt,
             'cover' => "",
+            'views'=>rand(10,100),
             'user_id'=>User::all()->random()->id,
         ];
     }

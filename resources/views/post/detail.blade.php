@@ -113,8 +113,32 @@
                                                 </p>
                                             @endguest
 
-                                        @forelse($post->comments as $comment)
 
+                                            <div class="d-flex align-items-center">
+                                                {{--                                                   viewer--}}
+                                                <div class="mx-1" title="viewer">
+                                                    <span class="badge bg-success rounded rounded-1">
+                                                        <i class="fas fa-eye me-2"></i>{{$post->views}}
+                                                    </span>
+                                                </div>
+                                                {{--                                                   comment--}}
+                                                <div class="mx-1" title="comments">
+                                                    <div class="text-end my-2" title="comments">
+                                                            <span class="badge bg-success rounded rounded-1">
+                                                                <i class="fas fa-comments"></i>
+                                                                {{count($post->comments)}}
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                        </div>
+{{--                                            @if(count($post->comments) != 0)--}}
+{{--                                                <div class="text-end my-2">--}}
+{{--                                                    Comment : {{count($post->comments)}}--}}
+{{--                                                    --}}{{-- {{\App\Models\Comment::where('post_id',$post->id)->count('id')}} --}}
+{{--                                                </div>--}}
+{{--                                            @endif--}}
+
+                                            @forelse($post->comments as $comment)
                                                 <div class="border rounded p-3 mb-3">
                                                     <div class="d-flex justify-content-between mb-3">
                                                         <div class="d-flex">

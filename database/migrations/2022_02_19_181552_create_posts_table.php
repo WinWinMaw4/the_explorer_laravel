@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->longText('description');
             $table->text('excerpt');
             $table->string('cover');
+            $table->integer('views')->default(0);
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

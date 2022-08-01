@@ -23,6 +23,11 @@ class Post extends Model
         return $this->hasMany(Gallery::class);
     }
 
+    public function postViews()
+    {
+        return $this->hasMany(ArticleView::class);
+    }
+
     //accessor
     public function getTitleAttribute($value){
         return ucwords($value);

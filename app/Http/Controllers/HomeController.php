@@ -42,7 +42,7 @@ class HomeController extends Controller
 
     public function userPost($user_id){
 
-        $posts = Post::where('user_id',$user_id)->paginate(5);
+        $posts = Post::latest()->where('user_id',$user_id)->paginate(5);
         return view('post.user-posts',[
             'posts'=>$posts
         ]);

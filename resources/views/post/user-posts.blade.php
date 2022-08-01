@@ -27,8 +27,8 @@
                 <div class="posts">
                     @forelse($posts as $post)
                         <div class="post mb-4">
-                            <div class="row">
-                                <div class="col-lg-4">
+                            <div class="row flex-column align-items-center">
+                                <div class="col-lg-8">
                                     <img src="{{ asset("storage/cover/".$post->cover) }}" class="cover-img rounded-3 w-100" alt="">
                                 </div>
                                 <div class="col-lg-8">
@@ -56,8 +56,9 @@
                                                     @endauth
                                                 </div>
                                             </div>
-                                            <p class="text-black-50">
-                                                {{ $post->excerpt }}
+                                            <p class="text-black align-items-start text-start overflow-hidden" style="max-height: 160px;">
+                                                {{-- {{\Illuminate\Support\Str::wordCount($post->excerpt)}} --}}
+                                                {{$post->excerpt}}
                                             </p>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center">
@@ -72,9 +73,12 @@
                                                 </div>                                                <p class="mb-0 ms-2 small">
                                                     <span class="text-primary   ">{{ $post->user->name }}</span>
                                                     <br>
-                                                    <i class="fas fa-calendar"></i>
-                                                    {{--                                                        {{ $post->created_at->diffForHumans() }}--}}
-                                                    {{$post->created_at->format("d M Y"),}}
+                                                    <span class="text-black-50 ">
+                                                        <i class="fas fa-calendar"></i>
+                                                        {{--                                                        {{ $post->created_at->diffForHumans() }}--}}
+                                                        {{$post->created_at->format("d M Y"),}}
+                                                        {{$post->created_at->format("h:i a"),}}
+                                                    </span>
                                                 </p>
                                             </div>
                                             <a href="{{route('post.detail',$post->slug)}}" class="btn btn-outline-primary">Read More</a>
