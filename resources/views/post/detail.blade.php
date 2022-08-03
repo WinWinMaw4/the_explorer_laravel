@@ -1,4 +1,27 @@
 @extends('master')
+@section('head')
+    <style>
+        .like-btn{
+            border: 1px solid #03772c;
+            color: #017534;
+            font-weight: bold;
+            transition: .3s;
+        }
+        .like-btn:active{
+            transform: scale(1.05);
+            /*color: #03c75b;*/
+        }
+        .like-btn:focus-within{
+            box-shadow: none;
+        }
+        .bg-liked{
+            background-color: #02ad4d;
+            color: white;
+            font-weight: bold;
+
+        }
+    </style>
+@endsection
 @section('content')
 
     <div class="container">
@@ -74,6 +97,27 @@
                             </div>
                         @endif
 
+                        <div class="d-flex justify-content-end align-items-center">
+
+                            <div class="like-count mx-2 fs-4">
+                                {{$post->likes->count()}}
+                            </div>
+                            @auth()
+                                <form action="{{route('likes',$post->id)}}" id="like_form" method="post">
+                                    @csrf
+
+                                    <button class="btn like-btn {{$post->likes->contains('user_id',auth()->id())? 'bg-liked':''}}">
+                                        Like
+                                    </button>
+                                </form>
+                            @else
+                                <button class="btn like-btn" onclick="alert('please first log in')">
+                                    Like
+                                </button>
+                            @endauth
+                        </div>
+                    </div>
+
 
                         <div class="my-5">
                             <h4 class="text-center fw-bold mb-4">Users Comment</h4>
@@ -117,14 +161,14 @@
                                             <div class="d-flex align-items-center">
                                                 {{--                                                   viewer--}}
                                                 <div class="mx-1" title="viewer">
-                                                    <span class="badge bg-success rounded rounded-1">
+                                                    <span class="badge bg-dark rounded rounded-1">
                                                         <i class="fas fa-eye me-2"></i>{{$post->views}}
                                                     </span>
                                                 </div>
                                                 {{--                                                   comment--}}
                                                 <div class="mx-1" title="comments">
                                                     <div class="text-end my-2" title="comments">
-                                                            <span class="badge bg-success rounded rounded-1">
+                                                            <span class="badge bg-dark rounded rounded-1">
                                                                 <i class="fas fa-comments"></i>
                                                                 {{count($post->comments)}}
                                                             </span>
@@ -220,5 +264,28 @@
             })
 
         }
+    </script>
+
+
+    <script>
+        let likeForm = document.getElementById('like_form');
+
+        likeForm.addEventListener('submit',function (e){
+            e.preventDefault();
+
+            let formData = new FormData(likeForm);
+            console.log(likeForm.getAttribute('action'))
+            axios.post(likeForm.getAttribute('action'),formData).then(function (response){
+                if(response.data.status == 'success'){
+                    document.querySelector('.like-btn').classList.add('bg-liked');
+                    document.querySelector('.like-count').innerText = response.data.likeCount;
+
+                }else{
+                    document.querySelector('.like-btn').classList.remove('bg-liked');
+                    document.querySelector('.like-count').innerText = response.data.likeCount;
+                }
+            })
+        })
+
     </script>
 @endpush

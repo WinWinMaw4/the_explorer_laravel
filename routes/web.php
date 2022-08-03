@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,8 +29,10 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('/post',PostController::class);
 Route::get('search',[PostController::class,'search'])->name('search');
-Route::resource('/comment',\App\Http\Controllers\CommentController::class);
-Route::resource('/gallery',\App\Http\Controllers\GalleryController::class);
+Route::resource('/comment',CommentController::class);
+Route::resource('/gallery',GalleryController::class);
+Route::post('likes/{postId}',[PostController::class,'likes'])->name('likes');
+
 
 Route::prefix('/user')->group(function (){
     Route::get('/post/{id}',[HomeController::class,'userPost'])->name('user.post');

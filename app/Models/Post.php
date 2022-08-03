@@ -28,6 +28,9 @@ class Post extends Model
         return $this->hasMany(ArticleView::class);
     }
 
+    public function likes(){
+        return $this->hasMany(LikeDisLike::class);
+    }
     //accessor
     public function getTitleAttribute($value){
         return ucwords($value);
@@ -38,4 +41,6 @@ class Post extends Model
     {
         $this->attributes["slug"] = Str::slug($value);
     }
+
+
 }

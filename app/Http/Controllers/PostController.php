@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Classes\FileControl;
 use App\Jobs\CreateFile;
 use App\Mail\PostMail;
+use App\Models\LikeDislike;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
@@ -168,5 +169,22 @@ class PostController extends Controller
 
         $post->delete();
         return redirect()->route('index');
+    }
+
+    public function likes($postId){
+        $existing_like = LikeDislike::where('post_id', $postId)->where('user_id',auth()->user()->id)->first();
+
+        if($existing_like){
+            $existing_like->delete();
+            $likeCount = LikeDisLike::where('post_id',$postId)->count();
+            return response()->json(['status'=>'delete','info'=>'unlike','likeCount'=>$likeCount]);
+
+        }else{
+            LikeDisLike::createLikeLog($postId);
+            $likeCount = LikeDisLike::where('post_id',$postId)->count();
+        }
+//        return redirect()->back();
+        return response()->json(['status'=>'success','info'=>'liked','likeCount'=>$likeCount]);
+
     }
 }

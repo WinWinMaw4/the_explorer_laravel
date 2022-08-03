@@ -105,14 +105,14 @@
                                                <div class="d-flex justify-content-center align-items-center text-end my-2">
 {{--                                                   viewer--}}
                                                    <div class="mx-1" title="viewer">
-                                                    <span class="badge bg-success rounded rounded-1">
+                                                    <span class="badge bg-dark rounded rounded-1">
                                                         <i class="fas fa-eye me-2"></i>{{$post->views}}
                                                     </span>
                                                    </div>
 {{--                                                   comment--}}
                                                    <div class="mx-1" title="comments">
                                                        <div class="text-end my-2" title="comments">
-                                                            <span class="badge bg-success rounded rounded-1">
+                                                            <span class="badge bg-dark rounded rounded-1">
                                                                 <i class="fas fa-comments"></i>
                                                                 {{count($post->comments)}}
                                                             </span>
